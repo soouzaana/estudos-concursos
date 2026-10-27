@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --b50: 245 243 255; --b100: 237 233 254; --b200: 221 214 254; --b300: 196 181 253; --b400: 167 139 250;
+  --b500: 139 92 246; --b600: 109 40 217; --b700: 91 33 182; --b800: 76 29 149; --b900: 59 7 100;
+  --surface: 250 248 255; --card: 255 255 255; --ink: 30 27 46; --muted: 90 85 110; --line: 232 228 244;
+  --accent-text: 91 33 182; --accent-soft: 237 233 254;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+  body { @apply bg-surface font-sans text-ink antialiased; min-height: 100dvh; overscroll-behavior-y: none; }
+  h1, h2, h3 { @apply font-semibold tracking-tight; }
+  :focus-visible { outline: 2px solid rgb(var(--b500)); outline-offset: 2px; border-radius: 6px; }
+  button, [role='button'], a, select, summary { touch-action: manipulation; }
+  ::selection { background: rgb(var(--b200)); color: rgb(var(--b900)); }
+}
+
+@layer components {
+  .card { @apply rounded-xl2 border border-line bg-card shadow-sm; }
+  .card-pad { @apply p-4 sm:p-5; }
+  .btn { @apply inline-flex min-h-[44px] select-none items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition duration-150 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-sm { @apply min-h-[36px] px-3 py-1.5 text-xs; }
+  .btn-primary { @apply bg-brand-600 text-white shadow-sm hover:bg-brand-700; }
+  .btn-soft { background: rgb(var(--accent-soft)); color: rgb(var(--accent-text)); }
+  .btn-soft:hover { filter: brightness(0.97); }
+  .btn-outline { @apply border border-line bg-card text-ink hover:bg-line/40; }
+  .btn-ghost { @apply text-muted hover:bg-line/50 hover:text-ink; }
+  .btn-danger { @apply bg-red-600 text-white hover:bg-red-700; }
+  .btn-icon { @apply inline-flex h-10 w-10 items-center justify-center rounded-xl text-muted transition hover:bg-line/50 hover:text-ink active:scale-95; }
+  .input { @apply min-h-[44px] w-full rounded-xl border border-line bg-card px-3 py-2 text-sm text-ink placeholder:text-muted/70 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30; }
+  textarea.input { @apply min-h-[88px] resize-y; }
+  select.input { @apply pr-8; }
+  .label { @apply mb-1 block text-xs font-medium text-muted; }
+  .chip { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium; }
+  .chip-accent { background: rgb(var(--accent-soft)); color: rgb(var(--accent-text)); }
+  .chip-muted { @apply bg-line/60 text-muted; }
+  .chip-ok { @apply bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200; }
+  .chip-warn { @apply bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200; }
+  .chip-bad { @apply bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-200; }
+  .chip-info { @apply bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-200; }
+  .text-accent { color: rgb(var(--accent-text)); }
+  .section-title { @apply text-sm font-semibold text-ink; }
+  .page-title { @apply text-xl font-semibold sm:text-2xl; }
+  .divide-line > :not([hidden]) ~ :not([hidden]) { @apply border-t border-line; }
+  .safe-bottom { padding-bottom: max(0.5rem, env(safe-area-inset-bottom)); }
+}
+
+/* Transições discretas */
+.fade-enter-active, .fade-leave-active { transition: opacity 0.15s ease, transform 0.15s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; transform: translateY(4px); }
+.sheet-enter-active, .sheet-leave-active { transition: opacity 0.18s ease; }
+.sheet-enter-from, .sheet-leave-to { opacity: 0; }
+.sheet-enter-active .sheet-panel, .sheet-leave-active .sheet-panel { transition: transform 0.2s ease; }
+.sheet-enter-from .sheet-panel, .sheet-leave-to .sheet-panel { transform: translateY(24px); }
+.list-enter-active, .list-leave-active { transition: all 0.18s ease; }
+.list-enter-from, .list-leave-to { opacity: 0; transform: translateX(-6px); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* Cartão de flashcard: aparência neutra para impressão/captura */
+.flip-card { perspective: 1200px; }
+
+@media print {
+  .no-print { display: none !important; }
+}
