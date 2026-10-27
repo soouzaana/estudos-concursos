@@ -134,8 +134,10 @@ async function salvar() {
       <FormField rotulo="Observações" para="co-obs"><textarea id="co-obs" v-model="f.observacoes" class="input" maxlength="2000" /></FormField>
     </form>
     <template #rodape>
-      <button type="button" class="btn btn-outline" @click="emit('update:modelValue', false)">Cancelar</button>
-      <button type="submit" form="form-concurso" class="btn btn-primary">Salvar concurso</button>
+      <div class="flex w-full justify-end gap-2 sm:pr-12">
+        <button type="button" class="btn btn-outline" @click="emit('update:modelValue', false)">Cancelar</button>
+        <button type="submit" form="form-concurso" class="btn btn-primary">Salvar concurso</button>
+      </div>
     </template>
   </BaseModal>
 </template>
